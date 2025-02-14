@@ -1,0 +1,20 @@
+{
+  "extends": "next/core-web-vitals",
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/ban-types": "off",
+    "react/no-unescaped-entities": "off",
+    "no-var": "off",
+    "prefer-const": "off",
+    "no-unused-vars": "off",
+    "react/display-name": "off",
+    "import/no-anonymous-default-export": "off"
+  },
+  "ignorePatterns": [".next", "node_modules", "*.config.js", "*.config.ts"],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  }
+}

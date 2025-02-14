@@ -29,7 +29,7 @@ export default async function EditUserPage({
   const user = await getUser(params.id);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 mt-8 md:mt-0">
       <div>
         <h2 className="text-3xl font-bold tracking-tight">Edit User</h2>
         <p className="text-muted-foreground">Update user information below.</p>

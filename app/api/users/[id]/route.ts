@@ -1,14 +1,15 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
 import User from "@/models/User";
 import { getSession } from "@/lib/auth";
 
-export async function GET(
-  request: Request,
-  context: { params: { id: string } }
-) {
-  const { id } = context.params;
+export const dynamic = "force-dynamic";
+export const dynamicParams = true;
 
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
     const session = await getSession();
     if (!session) {
@@ -16,7 +17,7 @@ export async function GET(
     }
 
     await connectDB();
-    const user = await User.findById(id, { password: 0 });
+    const user = await User.findById(params.id, { password: 0 });
 
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
@@ -29,11 +30,9 @@ export async function GET(
 }
 
 export async function PUT(
-  request: Request,
-  context: { params: { id: string } }
+  request: NextRequest,
+  { params }: { params: { id: string } }
 ) {
-  const { id } = context.params;
-
   try {
     const session = await getSession();
     if (!session) {
@@ -44,7 +43,7 @@ export async function PUT(
     await connectDB();
 
     const user = await User.findByIdAndUpdate(
-      id,
+      params.id,
       { $set: body },
       { new: true, select: "-password" }
     );
@@ -60,11 +59,9 @@ export async function PUT(
 }
 
 export async function DELETE(
-  request: Request,
-  context: { params: { id: string } }
+  request: NextRequest,
+  { params }: { params: { id: string } }
 ) {
-  const { id } = context.params;
-
   try {
     const session = await getSession();
     if (!session) {
@@ -72,7 +69,7 @@ export async function DELETE(
     }
 
     await connectDB();
-    const user = await User.findByIdAndDelete(id);
+    const user = await User.findByIdAndDelete(params.id);
 
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });

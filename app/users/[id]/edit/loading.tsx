@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function EditUserLoading() {
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 mt-8 md:mt-0">
       <div>
         <Skeleton className="h-8 w-[200px]" />
         <Skeleton className="h-4 w-[300px] mt-2" />
